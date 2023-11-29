@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="tailwind_config.js"></script>
+    <script src="test.js" defer></script>
     <title>Utazási iroda</title>
 </head>
 <body class="bg-slate-100 min-h-screen dark:bg-slate-800 transition-all">
@@ -23,7 +24,8 @@
     <div class="flex justify-center">
       <div class="container grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-12 my-10 "></div>
     </div> 
-    <button>Show tests</button>
+    <button class="text-xl text-slate-900 dark:text-slate-300 p-5" onclick="document.querySelector('.tests').classList.toggle('invisible')">Show tests</button>
+    <div class="tests text-slate-900 dark:text-slate-300 pl-5 text-lg invisible"></div>
     <script> 
       const toggle = document.querySelector('.toggle')
       const image = document.querySelector('image')
@@ -31,7 +33,7 @@
       toggle.addEventListener('click', () => {
           document.querySelector('html').classList.toggle('dark')
           const theme = document.querySelector('.theme')
-          document.querySelector('html').classList == "dark" ? theme.innerHTML = "Dark" : theme.innerHTML = "Light"
+          document.querySelector('html').classList.contains("dark") ? theme.innerHTML = "Dark" : theme.innerHTML = "Light"
       })
       
 
