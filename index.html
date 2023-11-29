@@ -11,53 +11,60 @@
 </head>
 <body class="bg-slate-100 min-h-screen dark:bg-slate-800 transition-all">
     <header class="bg-slate-300 text-slate-900 shadow-lg dark:bg-slate-900 dark:text-slate-300 flex justify-center items-center top-0 sticky z-50">
-        <input type="checkbox" class="toggle toggle-lg" />
+        <h3 class="font-bold text-lg mr-5 theme">Light</h3>
+        <input type="checkbox" class="toggle toggle-lg"/>
         <h1 class=" text-3xl text-center p-5">Utazási Iroda</h1>
-    </header>
-    <dialog class="info w-96 h-fit bg-slate-100 dark:bg-slate-800 rounded-md backdrop:bg-slate-100/80 dark:backdrop:bg-slate-900/80 p-8 z-50 shadow-xl open:animate-modalf">
-      <button class="text-slate-800 dark:text-slate-100 text-xl font-serif bg-slate-100 dark:bg-slate-800 mb-5 close">Close</button>
-      <p class="text text-slate-800 dark:text-slate-100 text-justify"></p>
+      </header>
+      <dialog class="info w-96 h-fit bg-slate-100 dark:bg-slate-800 rounded-md backdrop:bg-slate-100/80 dark:backdrop:bg-slate-900/80 p-8 z-50 shadow-xl open:animate-modalf">
+        <button class="text-slate-800 dark:text-slate-100 text-xl font-serif bg-slate-100 dark:bg-slate-800 mb-5 close">Close</button>
+        <img class="modalImg rounded-md mb-4" src="" alt="">
+        <p class="text text-slate-800 dark:text-slate-100 text-justify"></p>
     </dialog>
     <div class="flex justify-center">
       <div class="container grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-12 my-10 "></div>
-    </div>
-
+    </div> 
+    <button>Show tests</button>
     <script> 
-        const toggle = document.querySelector('.toggle')
-        const image = document.querySelector('image')
-        const container = document.querySelector('.container')
-        toggle.addEventListener('click', () => {
-            document.querySelector('html').classList.toggle('dark')
-        })
-        
+      const toggle = document.querySelector('.toggle')
+      const image = document.querySelector('image')
+      const container = document.querySelector('.container')
+      toggle.addEventListener('click', () => {
+          document.querySelector('html').classList.toggle('dark')
+          const theme = document.querySelector('.theme')
+          document.querySelector('html').classList == "dark" ? theme.innerHTML = "Dark" : theme.innerHTML = "Light"
+      })
+      
 
-        getData('https://raw.githubusercontent.com/mkatay/json-tours/main/tours', renderTours)
+      getData('https://raw.githubusercontent.com/mkatay/json-tours/main/tours', renderTours)
 
-        function renderTours(data){
-            data.forEach((item) => {
-                container.innerHTML += `
-                <div class="card w-84 dark:bg-slate-700 bg-slate-100 shadow-xl " >
-            <figure><img class="h-64 w-full object-cover" src="${item.image}" alt="${item.name}"/></figure>
-            <div class="card-body" id="${item.id}">
-              <h2 class="text-slate-900 dark:text-slate-100 text-2xl font-mono">${item.name}</h2>
-              <p class="text-slate-800 dark:text-slate-200">${item.price}</p>
-              <button onclick="showCurrentInfo(event)" data-info="${item.info}" class="text-slate-800 dark:text-slate-200 text-lg font-mono cursor-pointer hover:text-slate-800/70 dark:hover:text-slate-200/70">More</button>
-              </div>
-          </div>`
-        })
-        }
+      function renderTours(data){
+          data.forEach((item) => {
+              container.innerHTML += `
+              <div class="card w-84 dark:bg-slate-700 bg-slate-100 shadow-xl " >
+          <figure><img class="h-64 w-full object-cover" src="${item.image}" alt="${item.name}"/></figure>
+          <div class="card-body" id="${item.id}">
+            <h2 class="text-slate-900 dark:text-slate-100 text-2xl font-mono">${item.name}</h2>
+            <p class="text-slate-800 dark:text-slate-200">${item.price}</p>
+            <button onclick="showCurrentInfo(event)" data-info="${item.info}" data-img="${item.image}" class="text-slate-800 dark:text-slate-200 text-lg font-mono cursor-pointer hover:text-slate-800/70 dark:hover:text-slate-200/70">More</button>
+            </div>
+        </div>`
+      })
+      }
 
-        const modal = document.querySelector('.info')
-        function showCurrentInfo(e){
-          const text = document.querySelector('.text')
-          modal.showModal()
-          text.innerHTML = e.target.dataset.info  
-        }
+      const modal = document.querySelector('.info')
+      
+      function showCurrentInfo(e){
+        const text = document.querySelector('.text')
+        const image = document.querySelector('.modalImg')
+        modal.showModal()
+        text.innerHTML = e.target.dataset.info
+        image.src = e.target.dataset.img
+      }
 
-        const closeModal = document.querySelector('.close')
-        closeModal.addEventListener('click', () => {
-          modal.close()
-        })
+      const closeModal = document.querySelector('.close')
+      closeModal.addEventListener('click', () => {
+        modal.close()
+      })
       </script>
 </body>
 </html>
