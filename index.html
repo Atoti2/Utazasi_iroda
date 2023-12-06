@@ -11,15 +11,21 @@
     <title>Utazási iroda</title>
 </head>
 <body class="bg-slate-100 min-h-screen dark:bg-slate-800 transition-all">
-    <header class="bg-slate-300 text-slate-900 shadow-lg dark:bg-slate-900 dark:text-slate-300 flex justify-center items-center top-0 sticky z-50">
+    <header class="bg-slate-300 text-slate-900  shadow-lg dark:bg-slate-900 dark:text-slate-300 flex justify-center items-center top-0 sticky z-50">
         <h3 class="font-bold text-lg mr-5 theme">Light</h3>
         <input type="checkbox" class="toggle toggle-lg"/>
         <h1 class=" text-3xl text-center p-5">Utazási Iroda</h1>
       </header>
-      <dialog class="info w-96 h-fit bg-slate-100 dark:bg-slate-800 rounded-md backdrop:bg-slate-100/80 dark:backdrop:bg-slate-900/80 p-8 z-50 shadow-xl open:animate-modalf">
-        <button class="text-slate-800 dark:text-slate-100 text-xl font-serif bg-slate-100 dark:bg-slate-800 mb-5 close">Close</button>
-        <img class="modalImg rounded-md mb-4" src="" alt="">
-        <p class="text text-slate-800 dark:text-slate-100 text-justify"></p>
+      <dialog class="info gap-10 open:grid lg:grid-cols-2 grid-cols-1 w-[70vw] h-[70vh] bg-transparent rounded-md backdrop:bg-slate-100/80 dark:backdrop:bg-slate-900/80 p-8 z-50 open:animate-modalf">
+        <div class="flex justify-end">
+          <img class="modalImg rounded-md mb-4 h-[60vh]" src="" alt="">
+        </div>
+        <div class="bg-slate-100 text-slate-800 dark:bg-slate-900 dark:text-slate-100 h-fit p-5 rounded-md flex flex-col">
+          <div>
+            <button class="text-slate-800 dark:text-slate-100 text-xl font-serif bg-slate-100 dark:bg-slate-800 mb-3 close float-right">X</button>
+          </div>
+          <p class="text text-slate-800 dark:text-slate-100 text-justify"></p>
+        </div>
     </dialog>
     <div class="flex justify-center">
       <div class="container grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-12 my-10 "></div>
@@ -36,7 +42,6 @@
           document.querySelector('html').classList.contains("dark") ? theme.innerHTML = "Dark" : theme.innerHTML = "Light"
       })
       
-
       getData('https://raw.githubusercontent.com/mkatay/json-tours/main/tours', renderTours)
 
       function renderTours(data){
@@ -62,7 +67,6 @@
         text.innerHTML = e.target.dataset.info
         image.src = e.target.dataset.img
       }
-
       const closeModal = document.querySelector('.close')
       closeModal.addEventListener('click', () => {
         modal.close()
